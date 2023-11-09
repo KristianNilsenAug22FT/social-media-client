@@ -1,7 +1,7 @@
 describe('Invalid Login Attempt', () => {
     it('should show error message for invalid credentials', () => {
       // Visit the website
-      cy.visit('http://localhost:5500'); // Change the URL before PR
+      cy.visit('https://kristiannilsenaug22ft.github.io/social-media-client/'); // Change the URL before PR
   
       cy.get('.modal.fade.show').invoke('css', 'display', 'none');
   
