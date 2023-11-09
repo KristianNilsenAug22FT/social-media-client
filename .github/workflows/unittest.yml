@@ -3,6 +3,8 @@ on:
   pull_request:
   workflow_dispatch:
 
+
+    
 jobs:
   run-unit-tests:
     name: Run Unit Tests
@@ -17,8 +19,22 @@ jobs:
         with:
           node-version: 16
 
+
+      
+          
       - name: Install all dependencies
         run: npm install
 
+      - name: Install fetch-mock
+        run: npm install fetch-mock
+      
+      - name: Install cross-fetch
+        run: npm install cross-fetch
+        
+      - name: Install jest-fetch-mock
+        run: npm install --save-dev jest-fetch-mock
+
       - name: Run Tests
         run: npm run test-unit
+
+     

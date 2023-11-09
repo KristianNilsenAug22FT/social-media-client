@@ -1,26 +1,38 @@
 import { login } from './login';
 
-import 'jest-localstorage-mock';
+// Mock localStorage
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
 
 beforeEach(() => {
-  localStorage.clear();
+  // Clear the mocks before each test
+  jest.clearAllMocks();
+
+  // Mock the global localStorage
+  Object.defineProperty(global, 'localStorage', { value: localStorageMock });
+
+  // Mock the fetch function
+global.fetch = jest.fn().mockResolvedValueOnce({
+  ok: true,
+  json: () => Promise.resolve({ accessToken: 'mockToken' }),
+});
+});
+
+afterEach(() => {
+  // Restore the original fetch function
+  jest.restoreAllMocks();
 });
 
 describe('login function', () => {
   it('should store a token in browser storage', async () => {
-    // Mock the fetch function to return a successful response
-    jest.spyOn(global, 'fetch').mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ accessToken: 'mockToken' }),
-    });
-
     // Call the login function
     await login('test@example.com', 'password');
 
     // Ensure that the token is stored in localStorage
-    expect(localStorage.getItem('token')).toBe(JSON.stringify('mockToken'));
-
-    // Restore the original fetch function
-    global.fetch.mockRestore();
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('token', JSON.stringify('mockToken'));
   });
 });
