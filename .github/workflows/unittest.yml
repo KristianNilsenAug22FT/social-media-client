@@ -25,6 +25,9 @@ jobs:
       - name: Install all dependencies
         run: npm install
 
+      - name: Install fetch-mock
+        run: npm install fetch-mock
+      
       - name: Install cross-fetch
         run: npm install cross-fetch
       
