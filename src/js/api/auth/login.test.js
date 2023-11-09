@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import { login } from './login';
 
 import 'jest-localstorage-mock';
@@ -14,13 +15,20 @@ describe('login function', () => {
       json: () => Promise.resolve({ accessToken: 'mockToken' }),
     });
 
+    // Use node-fetch instead of global.fetch
+    jest.spyOn(fetch, 'default').mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ accessToken: 'mockToken' }),
+    });
+
     // Call the login function
     await login('test@example.com', 'password');
 
     // Ensure that the token is stored in localStorage
     expect(localStorage.getItem('token')).toBe(JSON.stringify('mockToken'));
 
-    // Restore the original fetch function
+    // Restore the original fetch functions
     global.fetch.mockRestore();
+    fetch.default.mockRestore();
   });
 });
