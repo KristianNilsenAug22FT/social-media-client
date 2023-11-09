@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
-import { login } from './login';
+const fetch = require('node-fetch');
+const { login } = require('./login');
 
-import 'jest-localstorage-mock';
+require('jest-localstorage-mock');
 
 beforeEach(() => {
   localStorage.clear();
