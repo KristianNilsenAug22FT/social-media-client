@@ -16,10 +16,10 @@ beforeEach(() => {
   Object.defineProperty(global, 'localStorage', { value: localStorageMock });
 
   // Mock the fetch function
-  jest.spyOn(global, 'fetch').mockResolvedValueOnce({
-    ok: true,
-    json: () => Promise.resolve({ accessToken: 'mockToken' }),
-  });
+global.fetch = jest.fn().mockResolvedValueOnce({
+  ok: true,
+  json: () => Promise.resolve({ accessToken: 'mockToken' }),
+});
 });
 
 afterEach(() => {
