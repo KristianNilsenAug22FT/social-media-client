@@ -1,9 +1,8 @@
 name: Automated Unit Tests
 
-on:
-  push:
-    branches:
-      - main
+on: 
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
