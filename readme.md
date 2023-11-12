@@ -1,5 +1,7 @@
 # Social Media Client
 
+[![Automated E2E Testing](https://github.com/KristianNilsenAug22FT/social-media-client/actions/workflows/e2e-test.yml/badge.svg?branch=workflow)](https://github.com/KristianNilsenAug22FT/social-media-client/actions/workflows/e2e-test.yml)
+
 Welcome to the Social Media Client project. This README will provide an overview of the project, instructions on how to use it, and details about the available testing and linting tools.
 
 ## Table of Contents
